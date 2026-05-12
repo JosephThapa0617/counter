@@ -1,41 +1,219 @@
-<div style="display:flex;justify-content:center;align-items:center;min-height:320px;">
-  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-xl);padding:2rem 2.5rem;text-align:center;max-width:360px;width:100%;">
-    <div style="font-size:2.5rem;display:inline-block;animation:pulse 1.5s infinite;">💖</div>
-    <h2 style="font-size:20px;font-weight:500;margin:0.75rem 0 0.25rem;color:var(--color-text-primary);">Joseph &amp; Leesa</h2>
-    <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 1.5rem;">counting every moment since May 13</p>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.25rem;">
-      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
-        <div id="days" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
-        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">days</div>
-      </div>
-      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
-        <div id="hours" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
-        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">hours</div>
-      </div>
-      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
-        <div id="mins" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
-        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">mins</div>
-      </div>
-      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
-        <div id="secs" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
-        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">secs</div>
-      </div>
-    </div>
-    <p style="font-size:13px;color:var(--color-text-secondary);margin:0;">every second counts 💕</p>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="J & L 💖"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<title>J & L 💖</title>
+
+<!-- Inline SVG favicon as app icon -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ff6b9d'/><text y='.9em' font-size='70' x='50%' dominant-baseline='top' text-anchor='middle'>💖</text></svg>"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ff6b9d'/><text y='.9em' font-size='70' x='50%' dominant-baseline='top' text-anchor='middle'>💖</text></svg>"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+
 <style>
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #ff6b9d;
+    --rose-light: #ffb3d0;
+    --rose-pale: #fff0f6;
+    --cream: #fff8f0;
+    --text-dark: #2d1a26;
+    --text-mid: #7a4f63;
+    --text-soft: #c49aad;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
+    position: relative;
+  }
+
+  /* Soft background blobs */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -20%;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffd6e8 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -15%;
+    left: -15%;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffe4f0 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .heart {
+    font-size: clamp(48px, 14vw, 72px);
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 4px 16px rgba(255,107,157,0.35));
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  .names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 9vw, 48px);
+    font-weight: 300;
+    color: var(--text-dark);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .names em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .subtitle {
+    font-size: clamp(11px, 3vw, 13px);
+    font-weight: 200;
+    color: var(--text-soft);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .cell {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 6px 12px;
+    box-shadow: 0 2px 20px rgba(255, 107, 157, 0.1);
+    border: 1px solid rgba(255,107,157,0.1);
+    transition: transform 0.15s ease;
+  }
+
+  .cell:active { transform: scale(0.96); }
+
+  .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 8vw, 38px);
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1;
+    display: block;
+  }
+
+  .label {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-soft);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: block;
+  }
+
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(15px, 4vw, 18px);
+    font-weight: 300;
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  /* Divider */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rose-light), transparent);
+    margin: 20px auto;
+  }
 </style>
+</head>
+<body>
+<div class="container">
+  <div class="heart">💖</div>
+  <div class="names">Joseph <em>&</em> Leesa</div>
+  <div class="divider"></div>
+  <div class="subtitle">counting every moment since May 13</div>
+
+  <div class="grid">
+    <div class="cell">
+      <span class="num" id="days">0</span>
+      <span class="label">days</span>
+    </div>
+    <div class="cell">
+      <span class="num" id="hours">0</span>
+      <span class="label">hours</span>
+    </div>
+    <div class="cell">
+      <span class="num" id="mins">0</span>
+      <span class="label">mins</span>
+    </div>
+    <div class="cell">
+      <span class="num" id="secs">0</span>
+      <span class="label">secs</span>
+    </div>
+  </div>
+
+  <div class="tagline">every second counts 💕</div>
+</div>
+
 <script>
-const start=new Date("2026-05-13T00:00:00");
-function tick(){
-  const diff=Date.now()-start;
-  const s=Math.floor(diff/1000);
-  document.getElementById("days").textContent=Math.floor(s/86400);
-  document.getElementById("hours").textContent=Math.floor((s%86400)/3600);
-  document.getElementById("mins").textContent=Math.floor((s%3600)/60);
-  document.getElementById("secs").textContent=s%60;
-}
-tick();setInterval(tick,1000);
+  const start = new Date("2026-05-13T00:00:00");
+  function tick() {
+    const diff = Math.max(0, Date.now() - start);
+    const s = Math.floor(diff / 1000);
+    document.getElementById("days").textContent = Math.floor(s / 86400);
+    document.getElementById("hours").textContent = Math.floor((s % 86400) / 3600);
+    document.getElementById("mins").textContent = Math.floor((s % 3600) / 60);
+    document.getElementById("secs").textContent = s % 60;
+  }
+  tick();
+  setInterval(tick, 1000);
 </script>
+</body>
+</html>
