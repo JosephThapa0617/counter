@@ -1,0 +1,41 @@
+<div style="display:flex;justify-content:center;align-items:center;min-height:320px;">
+  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-xl);padding:2rem 2.5rem;text-align:center;max-width:360px;width:100%;">
+    <div style="font-size:2.5rem;display:inline-block;animation:pulse 1.5s infinite;">💖</div>
+    <h2 style="font-size:20px;font-weight:500;margin:0.75rem 0 0.25rem;color:var(--color-text-primary);">Joseph &amp; Leesa</h2>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 1.5rem;">counting every moment since May 13</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.25rem;">
+      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
+        <div id="days" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">days</div>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
+        <div id="hours" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">hours</div>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
+        <div id="mins" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">mins</div>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 0.5rem;">
+        <div id="secs" style="font-size:22px;font-weight:500;color:var(--color-text-primary);">0</div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px;">secs</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin:0;">every second counts 💕</p>
+  </div>
+</div>
+<style>
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+</style>
+<script>
+const start=new Date("2026-05-13T00:00:00");
+function tick(){
+  const diff=Date.now()-start;
+  const s=Math.floor(diff/1000);
+  document.getElementById("days").textContent=Math.floor(s/86400);
+  document.getElementById("hours").textContent=Math.floor((s%86400)/3600);
+  document.getElementById("mins").textContent=Math.floor((s%3600)/60);
+  document.getElementById("secs").textContent=s%60;
+}
+tick();setInterval(tick,1000);
+</script>
